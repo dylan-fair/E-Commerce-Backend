@@ -8,8 +8,8 @@ router.get('/', (req, res) => {
   // be sure to include its associated Products
   Category.findAll({
     include: {
-      module: Product,
-      attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
+      model: Product,
+      attributes: ['product_name', 'price', 'stock', 'category_id']
     }
   })
     .then(data => {
@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
       res.json(data)
     })
     .catch(err => {
+      console.log(err);
       res.status(500).json(err);
     })
 });
@@ -32,7 +33,7 @@ router.get('/:id', (req, res) => {
       id: req.params.id
     },
     include: {
-      module: Product,
+      model: Product,
       attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
     }
   })
