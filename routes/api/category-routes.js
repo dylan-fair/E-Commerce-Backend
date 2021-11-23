@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   Category.findAll({
     include: {
       model: Product,
-      attributes: ['product_name', 'price', 'stock', 'category_id']
+      attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
     }
   })
     .then(data => {
@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
-  Category.update({
+  Category.update(req.body,{
     where: {
       id: req.params.id
     }
